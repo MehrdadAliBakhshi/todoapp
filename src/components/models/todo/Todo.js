@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 const Todo = ({ todo, onClick, isOpen, handleComplete, handleDelete }) => {
     const router = useRouter()
     const [today, setToday] = useState(new Date().getTime())
-    const [cat, setCat] = useState()
     const todoDeadline = new Date(todo.deadline).getTime();
     const diff = Math.round((todoDeadline - today) / (1000 * 60 * 60 * 24))
     const handleTodoEdit = (id) => {

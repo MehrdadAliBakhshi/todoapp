@@ -9,9 +9,7 @@ const Pagination = ({
     handlePagination,
     isDisableNext,
     isDisablePrev }) => {
-    
-    console.log("page length", pages.length);
-    console.log("currentPage", currentPage);
+
     const next = () => {
         if (currentPage < pages.length - 1 && pages.length > 1) {
             handleNext()

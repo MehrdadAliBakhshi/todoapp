@@ -13,18 +13,20 @@ const Todos = ({ categories }) => {
     const [showComplete, setShowComplete] = useState(false)
     const [loading, setLoading] = useState(true)
     const [pageCount, setPageCount] = useState(0)
+    const [isDisableNext, setIsDisableNext] = useState(false)
+    const [isDisablePrev, setIsDisablePrev] = useState(false)
+    const [currentPage, setCurrentPage] = useState(0)
+    const [changePageCount, setChangePageCount] = useState(false)
+
     const router = useRouter()
     const perPageNum = 5;
-    /*     const getTodos = async () => {
-            const res = await fetch('./api/todo')
-            const data = await res.json()
-            setAllTodos([...data]) 
-}*/
+
+    console.log(currentPage);
+    console.log(changePageCount);
     const fetchTodos = async () => {
         await fetch('./api/todo')
             .then(res => res.json())
             .then(data => {
-                setPageCount(Math.ceil(data.length / perPageNum))
                 setAllTodos([...data])
             })
             .finally(() => {
@@ -32,9 +34,36 @@ const Todos = ({ categories }) => {
 
             })
     }
+    const countPage = () => {
+        if (allTodos) {
+            if (allTodos.length > 0) {
+                setPageCount(Math.ceil(allTodos?.length / perPageNum))
+            } else {
+                setPageCount(0)
+            }
+        }
+    }
+    useEffect(() => {
+        if (currentPage === 0) {
+            setIsDisablePrev(true)
+            setIsDisableNext(false)
+
+        }
+        if (currentPage === pageCount - 1) {
+            setIsDisableNext(true)
+            setIsDisablePrev(false)
+        }
+    }, [currentPage])
+
+    useEffect(() => {
+        setCurrentPage(pageCount - 1)
+    }, [changePageCount , pageCount])
     useEffect(() => {
         fetchTodos()
     }, [])
+    useEffect(() => {
+        countPage()
+    }, [allTodos])
     /**
      * toggle isComplete of todo by id and refresh page
      * @param {*} id 
@@ -78,13 +107,14 @@ const Todos = ({ categories }) => {
                 })
                 if (res.status === 200) {
                     fetchTodos()
-                    router.refresh()
+                    countPage()
+                    router.push('/')
+                    setChangePageCount(prev => !prev)
                 }
             }
         })
 
     }
-
     return (
         <>
             <div className={styles.all_todos}>
@@ -109,6 +139,10 @@ const Todos = ({ categories }) => {
                             handleDelete={handleDelete}
                             pageCount={pageCount}
                             perPageNum={perPageNum}
+                            isDisableNext={isDisableNext}
+                            isDisablePrev={isDisablePrev}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
                         />
                         :
                         <div className={styles.todos_not_created}>

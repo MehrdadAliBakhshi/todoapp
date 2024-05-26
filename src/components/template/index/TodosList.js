@@ -4,32 +4,26 @@ import styles from './todosList.module.css'
 import Todo from '@/components/models/todo/Todo';
 import Pagination from './Pagination';
 
-const TodosList = ({ todos,
+const TodosList = ({
+    todos,
     handleComplete,
     handleDelete,
     categories,
     showComplete,
     pageCount,
-    perPageNum }) => {
-    const [currentPage, setCurrentPage] = useState(0)
-    const [activeIndex, setActiveIndex] = useState(null)
-    const [isDisableNext, setIsDisableNext] = useState(false)
-    const [isDisablePrev, setIsDisablePrev] = useState(false)
+    perPageNum,
+    isDisableNext,
+    isDisablePrev,
+    currentPage,
+    setCurrentPage
+}) => {
 
-    useEffect(() => {
-        if (currentPage === 0) {
-            setIsDisablePrev(true)
-            setIsDisableNext(false)
-            
-        }
-        if (currentPage === pageCount - 1) {
-            setIsDisableNext(true)
-            setIsDisablePrev(false)
-        }
-    }, [currentPage])
+    const [activeIndex, setActiveIndex] = useState(null)
+
+
+
 
     const pages = new Array(pageCount).fill(0)
-    console.log(pageCount);
     /**
      * 
      */

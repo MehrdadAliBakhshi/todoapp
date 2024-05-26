@@ -7,6 +7,7 @@ import persian_fa from "react-date-object/locales/persian_fa"
 import { Formik } from 'formik';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import 'react-toastify/dist/ReactToastify.css';
 const validate = (values) => {
     const errors = {}
 
