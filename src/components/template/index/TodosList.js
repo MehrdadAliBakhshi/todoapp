@@ -2,45 +2,34 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styles from './todosList.module.css'
 import Todo from '@/components/models/todo/Todo';
-import Link from 'next/link';
 import Pagination from './Pagination';
 
-const TodosList = ({ todos, handleComplete, handleDelete, categories, showComplete }) => {
+const TodosList = ({ todos,
+    handleComplete,
+    handleDelete,
+    categories,
+    showComplete,
+    pageCount,
+    perPageNum }) => {
     const [currentPage, setCurrentPage] = useState(0)
-    const [pageCount, setPageCount] = useState(0)
     const [activeIndex, setActiveIndex] = useState(null)
-    const [isDisablePrev, setIsDisablePrev] = useState(false)
     const [isDisableNext, setIsDisableNext] = useState(false)
-    useEffect(() => {
-        setPageCount(Math.ceil(todos.length / perPageNum))
-    }, [])
+    const [isDisablePrev, setIsDisablePrev] = useState(false)
 
-    const perPageNum = 5;
-
-    /**
-     * change next and prev btn to disable
-     * base on current page
-     */
     useEffect(() => {
         if (currentPage === 0) {
             setIsDisablePrev(true)
             setIsDisableNext(false)
-        } else if (currentPage === pageCount - 1) {
+            
+        }
+        if (currentPage === pageCount - 1) {
             setIsDisableNext(true)
-            setIsDisablePrev(false)
-        } else {
-            setIsDisableNext(false)
             setIsDisablePrev(false)
         }
     }, [currentPage])
 
-    /**
-     * 
-     */
-
-
     const pages = new Array(pageCount).fill(0)
-
+    console.log(pageCount);
     /**
      * 
      */
@@ -64,9 +53,15 @@ const TodosList = ({ todos, handleComplete, handleDelete, categories, showComple
      * 
      */
     const hanldePrev = () => {
+        if (currentPage === 0 && pages.length === 1) {
+            setCurrentPage(0)
+        }
         setCurrentPage(prev => prev - 1)
     }
     const handleNext = () => {
+        if (pages.length < 1 && pages.length === currentPage + 1) {
+            setCurrentPage(page.length)
+        }
         setCurrentPage(prev => prev + 1)
     }
 
@@ -102,8 +97,9 @@ const TodosList = ({ todos, handleComplete, handleDelete, categories, showComple
                     pages={pages}
                     currentPage={currentPage}
                     handlePagination={handlePagination}
-                    isDisablePrev={isDisablePrev}
                     isDisableNext={isDisableNext}
+                    isDisablePrev={isDisablePrev}
+
                 />
             </div >
         </>

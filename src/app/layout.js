@@ -1,8 +1,10 @@
 import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
-import { authUser } from "@/utils/serverHelper";
-import { redirect } from "next/navigation";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/ReactToastify.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 export const metadata = {
   title: "Todo App",

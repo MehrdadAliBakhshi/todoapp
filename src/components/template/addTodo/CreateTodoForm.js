@@ -26,10 +26,8 @@ const validate = (values) => {
 const CreateTodoForm = ({ categories, userId }) => {
     const router = useRouter()
     const [today, setToday] = useState();
-    const [cats, setCats] = useState();
     const [val, setVal] = useState(new DateObject({ calendar: persian, locale: persian_fa }))
     const [valValidate, setValValidate] = useState('')
-    const [loading, setLoading] = useState(true)
     useEffect(() => {
         setToday(new DateObject({ calendar: persian, locale: persian_fa }))
     }, [])
@@ -45,7 +43,7 @@ const CreateTodoForm = ({ categories, userId }) => {
                         cats: "-1",
                     }}
                     validate={validate}
-                    onSubmit={async (values, { setSubmitting }) => {
+                    onSubmit={async (values) => {
                         if (!valValidate) {
                             const newTodo = {
                                 title: values.title,
@@ -59,17 +57,11 @@ const CreateTodoForm = ({ categories, userId }) => {
                                 headers: { 'Content-Type': "application/json" },
                                 body: JSON.stringify(newTodo)
                             })
-                            if (res.status === 201) {
+                            if (res.status == 201) {
                                 toast.success("فعالیت با موفقیت ایجاد شد", {
                                     autoClose: 1000,
                                     theme: "colored",
-                                    onClose: () => {
-                                        values.title = "";
-                                        values.des = "";
-                                        values.cat = "-1";
-                                        router.refresh();
-                                        setSubmitting(false)
-                                    }
+
                                 })
                             } else if (res.status === 409) {
                                 toast.error("مقادیر ورودی نا معتبر است", {

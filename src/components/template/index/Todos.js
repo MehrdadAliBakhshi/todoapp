@@ -5,25 +5,34 @@ import styles from './todos.module.css'
 import { ToastContainer, toast } from 'react-toastify';
 import TodoLoad from '@/components/models/todoLoadin/TodoLoad';
 import Link from 'next/link';
+import swal from 'sweetalert';
+import { useRouter } from 'next/navigation';
 
 const Todos = ({ categories }) => {
     const [allTodos, setAllTodos] = useState();
     const [showComplete, setShowComplete] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [pageCount, setPageCount] = useState(0)
+    const router = useRouter()
+    const perPageNum = 5;
+    /*     const getTodos = async () => {
+            const res = await fetch('./api/todo')
+            const data = await res.json()
+            setAllTodos([...data]) 
+}*/
+    const fetchTodos = async () => {
+        await fetch('./api/todo')
+            .then(res => res.json())
+            .then(data => {
+                setPageCount(Math.ceil(data.length / perPageNum))
+                setAllTodos([...data])
+            })
+            .finally(() => {
+                setLoading(false)
 
-    const getTodos = async () => {
-        const res = await fetch('./api/todo')
-        const data = await res.json()
-        setAllTodos([...data])
+            })
     }
-
     useEffect(() => {
-        const fetchTodos = async () => {
-            await fetch('./api/todo')
-                .then(res => res.json())
-                .then(data => setAllTodos([...data]))
-                .finally(() => setLoading(false))
-        }
         fetchTodos()
     }, [])
     /**
@@ -56,18 +65,25 @@ const Todos = ({ categories }) => {
      * delete todo
      */
     const handleDelete = async (id) => {
-        const res = await fetch('./api/todo', {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id })
+        swal({
+            title: "از حذف فعالیت اطمینان دارید؟",
+            icon: "warning",
+            buttons: ["خیر", "بله"]
+        }).then(async (result) => {
+            if (result) {
+                const res = await fetch('./api/todo', {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ id })
+                })
+                if (res.status === 200) {
+                    fetchTodos()
+                    router.refresh()
+                }
+            }
         })
-        if (res.status === 200) {
-            fetch('./api/todo')
-                .then(res => res.json())
-                .then(() => getTodos())
-        }
-    }
 
+    }
 
     return (
         <>
@@ -91,6 +107,8 @@ const Todos = ({ categories }) => {
                             showComplete={showComplete}
                             handleComplete={handleComplete}
                             handleDelete={handleDelete}
+                            pageCount={pageCount}
+                            perPageNum={perPageNum}
                         />
                         :
                         <div className={styles.todos_not_created}>
@@ -102,6 +120,5 @@ const Todos = ({ categories }) => {
             <ToastContainer />
         </>
     );
-};
-
+}
 export default Todos;
