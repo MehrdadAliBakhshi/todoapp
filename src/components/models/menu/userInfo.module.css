@@ -1,0 +1,10 @@
+.userinfo_container{
+    width: 100%;
+}
+.username{
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: var(--gold);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+}

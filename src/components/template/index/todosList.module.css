@@ -1,0 +1,24 @@
+.all_todos_list_container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: 85%;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.all_todos_list {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+  height: 100%;
+}
+
+.goto_todos_page {
+  border: 1px solid var(--green);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+}

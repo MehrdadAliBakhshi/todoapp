@@ -1,0 +1,9 @@
+.signout_container {
+  margin-top: 2rem;
+}
+
+.signout_link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

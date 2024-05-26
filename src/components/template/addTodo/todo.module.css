@@ -1,0 +1,44 @@
+.todo {
+  flex-basis: 100%;
+  display: flex;
+  height: 100%;
+  border-radius: 24px;
+  gap: 0.5rem;
+  background-color: var(--light);
+  padding: 1rem;
+}
+
+.btn_tab_container button {
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  gap: 1rem;
+}
+
+.active {
+  background-color: var(--gold) !important;
+}
+
+.seprator {
+  transform: rotate(45deg);
+  margin: 0 0.3rem;
+}
+.add_cat_first {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add_cat_first h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.add_cat_first h5 {
+  font-size: 1.2rem;
+  line-height: 3rem;
+}

@@ -1,0 +1,84 @@
+.form_container {
+  width: 100%;
+  background-color: var(--light);
+  padding: 1rem;
+  border-radius: 24px;
+  height: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 50%;
+  margin: 3rem auto 0;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.input_todo_title {
+  width: 100%;
+  border: 1px solid var(--light-grey);
+  border-radius: 16px;
+  padding: 0.5rem 1rem;
+}
+
+.input_todo_des {
+  width: 100%;
+  border: 1px solid var(--light-grey);
+  border-radius: 16px;
+  padding: 0.5rem 1rem;
+}
+
+.select_cat_container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.select_toto_list_container span {
+  text-wrap: nowrap;
+}
+
+.select_todo_list {
+  background: transparent;
+  border-radius: 16px;
+  border: 1px solid var(--light-grey);
+  padding: 0.5rem;
+  outline: none;
+  flex-basis: 100%;
+}
+
+.data_picker_container {
+  display: flex;
+  align-items: center;
+  grid-area: 0.5rem;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.create_todo_btns {
+  width: 100%;
+}
+
+.datepicker_todo {
+  border: 1px solid var(--light-grey);
+  padding: 0.5rem;
+  border-radius: 16px;
+  font-size: 1rem;
+}
+
+.datepicker_todo:focus {
+  outline: none;
+}
+
+.create_todo_btns > button {
+  width: 100%;
+}

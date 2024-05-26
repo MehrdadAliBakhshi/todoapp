@@ -1,0 +1,58 @@
+.create_cat_container {
+    display: flex;
+    align-items: center;
+    background-color: var(--light);
+    border-radius: 24px;
+    padding: 1rem;
+    width: 100%;
+}
+
+.create_cat_form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: row;
+    height: 100%;
+    gap: 2rem;
+}
+
+.create_cat_inputs {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.input_cat_title {
+    width: 100%;
+    border: 1px solid var(--light-grey);
+    border-radius: 16px;
+    padding: 0.5rem 1rem;
+}
+
+.select_cat_color_container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.create_cat_btns {
+    flex-basis: 15%;
+}
+
+.create_cat_btns>button {
+    width: 100%;
+}
+
+.cat_title {
+    flex-basis: 60%;
+    position: relative;
+}
+
+.error {
+    position: absolute;
+    bottom: -50%;
+    right: 1%;
+    margin-top: -1rem;
+    font-size: 0.8rem;
+    color: var(--red);
+}

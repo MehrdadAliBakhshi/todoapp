@@ -1,0 +1,181 @@
+.todos_list_item {
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--light-grey);
+}
+
+.todos_list_item.todo_whit_des {
+    max-height: auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.todo_title_container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.is_complete_square {
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 4px;
+    border: 1px solid var(--light);
+    cursor: pointer;
+}
+
+.completed_square {
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 4px;
+    background-color: springgreen;
+    border: 1px solid green;
+    cursor: pointer;
+}
+.notComplete_squre{
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 4px;
+    border: 1px solid #a74343;
+    background-color: var(--red);
+    cursor: pointer;
+}
+.todo_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 0.5rem;
+    transition: all 0.3s;
+    background-color: #F8C4B4;
+}
+
+.todo_header.active {
+    background-color: var(--light);
+
+}
+.todo_header.is_complete_header{
+    background-color: #B0EBB4;
+}
+.todo_body {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0.8;
+    transition: all 0.3s ease-in-out;
+    padding: 0.8rem 0.5rem;
+}
+
+.todo_body.active_body {
+    max-height: 10rem;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    transition: all 0.8s ease-in-out;
+}
+
+.show_describer_container svg {
+    transition: all 0.3s ease-in-out;
+}
+
+.edit_icon {
+    transform: rotate(-90deg);
+}
+
+.show_describer_container {
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.hide_describer_container {
+    transform: rotate(-90deg);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.edit_todo {
+    color: var(--blue);
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.edit_todo:hover {
+    background-color: var(--blue);
+    color: var(--light);
+}
+
+.todo_body .icon {
+    text-align: LEFT;
+}
+
+.todo_des {
+    flex-basis: 92%;
+}
+
+.create_todo_btns .primary_btn {
+    width: 100%;
+}
+
+.sub_title {
+    font-size: 0.8rem;
+}
+
+.todo_actions {
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    border-top: 1px solid var(--light);
+    padding: 0.5rem 0;
+}
+
+.todo_is_completed {
+    color: var(--green);
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+.todo_is_not_completed {
+    color: var(--red);
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+
+.todo_is_completed:hover {
+    background-color: var(--green);
+    color: var(--light);
+}
+.todo_is_not_completed:hover {
+    background-color: var(--red);
+    color: var(--light);
+}
+.todo_delete {
+    color: var(--red);
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.todo_delete:hover {
+    background-color: var(--red);
+    color: var(--light);
+}
+.todo_complete_container{
+    display: flex;
+    align-items: center;
+}

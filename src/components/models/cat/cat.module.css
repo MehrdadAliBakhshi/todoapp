@@ -1,0 +1,40 @@
+.data {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.eidt {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: var(--gold);
+    transition: all 0.3s ease-in-out;
+}
+
+.eidt:hover {
+    background-color: var(--gold-hover);
+}
+
+.delete {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: var(--red);
+    transition: all 0.3s ease-in-out;
+}
+
+.delete:hover {
+    background-color: var(--red-hover);
+}
+
+.cat_color {
+    width: 30px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 4px;
+}
