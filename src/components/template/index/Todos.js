@@ -8,6 +8,7 @@ import Link from 'next/link';
 import swal from 'sweetalert';
 import { useRouter } from 'next/navigation';
 import Filter from './Filter';
+import LostTodo from './LostTodo';
 
 const Todos = ({ categories, todos }) => {
     const [allTodos, setAllTodos] = useState();
@@ -17,34 +18,35 @@ const Todos = ({ categories, todos }) => {
     const [isDisableNext, setIsDisableNext] = useState(false)
     const [isDisablePrev, setIsDisablePrev] = useState(false)
     const [currentPage, setCurrentPage] = useState(0)
-    const [catId, setCatId] = useState("")
+    const [catId, setCatId] = useState("-1")
     const [filterTodos, setFilterTodos] = useState(allTodos)
     const router = useRouter()
     const perPageNum = 5;
-
-
-
-    const fetchTodos = async () => {
-        await fetch('./api/todo')
-            .then(res => res.json())
-            .then(data => {
-                setAllTodos([...data])
-            })
-            .finally(() => {
-                setLoading(false)
-
-            })
-    }
+    useEffect(() => {
+        setAllTodos([...todos])
+    }, [])
+    useEffect(() => {
+        if (allTodos?.length > 0) {
+            setLoading(false)
+            if (catId !== "-1" && catId) {
+                const fillTodos = allTodos.filter(todo => todo.catId._id === String(catId))
+                setFilterTodos([...fillTodos])
+            } else {
+                setFilterTodos(allTodos)
+            }
+        }
+    }, [catId, allTodos])
 
     const countPage = () => {
-        if (allTodos) {
-            if (allTodos.length > 0) {
-                setPageCount(Math.ceil(allTodos?.length / perPageNum))
+        if (filterTodos) {
+            if (filterTodos.length > 0) {
+                setPageCount(Math.ceil(filterTodos?.length / perPageNum))
             } else {
                 setPageCount(0)
             }
         }
     }
+
 
     useEffect(() => {
         if (currentPage === 0) {
@@ -52,7 +54,7 @@ const Todos = ({ categories, todos }) => {
             setIsDisableNext(false)
 
         }
-        if (currentPage === pageCount - 1) {
+        if (currentPage <= pageCount - 1) {
             setIsDisableNext(true)
             setIsDisablePrev(false)
         }
@@ -63,12 +65,12 @@ const Todos = ({ categories, todos }) => {
      }, [changePageCount, pageCount]) */
 
     useEffect(() => {
-        fetchTodos()
+
     }, [])
 
     useEffect(() => {
         countPage()
-    }, [allTodos])
+    }, [filterTodos])
 
 
 
@@ -114,7 +116,7 @@ const Todos = ({ categories, todos }) => {
                     body: JSON.stringify({ id })
                 })
                 if (res.status === 200) {
-                    fetchTodos()
+
                     countPage(0)
                     router.refresh()
                 }
@@ -132,9 +134,9 @@ const Todos = ({ categories, todos }) => {
     }
 
 
-
     return (
-        <>
+        <div className={styles.container}>
+            <LostTodo />
             <div className={styles.all_todos}>
                 <h1 className="title">فعــــــــــــالیــــــــت ها </h1>
                 <Filter
@@ -153,7 +155,7 @@ const Todos = ({ categories, todos }) => {
                     :
                     allTodos?.length ?
                         <TodosList
-                            todos={todos}
+                            todos={filterTodos}
                             categories={categories}
                             showComplete={showComplete}
                             handleComplete={handleComplete}
@@ -174,7 +176,7 @@ const Todos = ({ categories, todos }) => {
                 }
             </div>
             <ToastContainer />
-        </>
+        </div>
     );
 }
 export default Todos;

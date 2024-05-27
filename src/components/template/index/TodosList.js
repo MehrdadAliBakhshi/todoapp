@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './todosList.module.css'
 import Todo from '@/components/models/todo/Todo';
 import Pagination from './Pagination';
@@ -15,33 +15,11 @@ const TodosList = ({
     isDisableNext,
     isDisablePrev,
     currentPage,
-    setCurrentPage,
-    catId
+    setCurrentPage
 }) => {
 
     const [activeIndex, setActiveIndex] = useState(null)
-    const [allTodos, setAllTodos] = useState()
-    const [filterTodos, setFilterTodos] = useState(allTodos)
-
-    useEffect(() => {
-        setAllTodos([...todos])
-    }, [])
-
-
-    useEffect(()=>{
-        if(catId){
-            const fillTodos = allTodos.filter(todo => todo.catId._id === String(catId))
-            setFilterTodos([...fillTodos])
-        }else{
-            setFilterTodos(allTodos)
-        }
-    },[catId , allTodos])
-
-
-    
     const pages = new Array(pageCount).fill(0)
-
-
     /**
      * 
      */
@@ -81,9 +59,9 @@ const TodosList = ({
         <>
             <div className={styles.all_todos_list_container}>
                 <ul className={styles.all_todos_list}>
-                    {filterTodos?.length ? (
+                    {todos?.length ? (
                         !showComplete ?
-                            (filterTodos.slice(currentPage * perPageNum, (currentPage * perPageNum) + perPageNum).map((todo, index) =>
+                            (todos.slice(currentPage * perPageNum, (currentPage * perPageNum) + perPageNum).map((todo, index) =>
                                 <Todo
                                     key={todo._id}
                                     todo={todo}
@@ -94,7 +72,7 @@ const TodosList = ({
                                     handleDelete={handleDelete}
                                 />
                             )) :
-                            (filterTodos.slice(currentPage * perPageNum, (currentPage * perPageNum) + perPageNum).filter(todo => todo.isComplete === showComplete).map((todo, index) =>
+                            (todos.slice(currentPage * perPageNum, (currentPage * perPageNum) + perPageNum).filter(todo => todo.isComplete === showComplete).map((todo, index) =>
                                 <Todo
                                     key={todo._id}
                                     todo={todo}

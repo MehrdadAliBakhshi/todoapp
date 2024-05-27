@@ -1,3 +1,10 @@
+.container{
+  display: flex;
+  gap:0.5rem;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
 .all_todos {
   flex-basis: 100%;
   height: 100%;

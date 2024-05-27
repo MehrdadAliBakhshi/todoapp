@@ -4,7 +4,7 @@ import styles from './filter.module.css'
 const Filter = ({ categories, handleshowComplete, setCatId }) => {
     const complete = useRef()
     const catsChange = (e) => {
-        if (e.target.value && e.target.value !== "-1") {
+        if (e.target.value && e.target.value !== "") {
             setCatId(e.target.value)
         }
     }
