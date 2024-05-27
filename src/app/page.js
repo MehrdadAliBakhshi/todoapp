@@ -19,7 +19,7 @@ const Home = async () => {
       userId: user._id,
     })
   } */
-  const todos = await TodoModel.find({ userId: user._id }).populate("catId")
+  const todos = await TodoModel.find({ userId: user._id }).sort({_id:-1}).populate("catId")
   return (
     <>
       <Menu

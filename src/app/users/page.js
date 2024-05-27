@@ -16,7 +16,6 @@ const page = async () => {
     }
     const todos = await TodoModel.find({})
     const users = await UserModel.find({})
-    console.log(todos);
     return (
         <>
             <Menu

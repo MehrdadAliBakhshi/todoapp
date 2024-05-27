@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.show_complete {}
+
+.filter_by_cats {}
+
+.filter_by_deadline {}
