@@ -18,6 +18,10 @@ const TodosList = ({
     setCurrentPage
 }) => {
 
+    const compTodo = todos.filter(todo => todo.isComplete === showComplete)
+
+    console.log("compTodo",compTodo);
+    console.log(showComplete);
     const [activeIndex, setActiveIndex] = useState(null)
     const pages = new Array(pageCount).fill(0)
     /**

@@ -1,12 +1,28 @@
 .container {
     display: flex;
-    width: 100%;
+    width: 70%;
+    margin: auto;
     align-items: center;
     justify-content: space-between;
 }
 
-.show_complete {}
+.show_complete {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 
-.filter_by_cats {}
+.filter_by_cats {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 
-.filter_by_deadline {}
+.filter_by_cats select{
+    background: transparent;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border-color: var(--light-grey);
+}

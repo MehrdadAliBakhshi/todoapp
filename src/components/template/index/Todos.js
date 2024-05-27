@@ -20,6 +20,7 @@ const Todos = ({ categories, todos }) => {
     const [currentPage, setCurrentPage] = useState(0)
     const [catId, setCatId] = useState("-1")
     const [filterTodos, setFilterTodos] = useState(allTodos)
+    const [lostTodos, setLostTodos] = useState()
     const router = useRouter()
     const perPageNum = 5;
     useEffect(() => {
@@ -35,6 +36,7 @@ const Todos = ({ categories, todos }) => {
                 setFilterTodos(allTodos)
             }
         }
+        setCurrentPage(0)
     }, [catId, allTodos])
 
     const countPage = () => {
@@ -127,9 +129,13 @@ const Todos = ({ categories, todos }) => {
 
     const handleshowComplete = (checked) => {
         if (checked) {
-            setShowComplete(true)
+            if (allTodos?.length > 0) {
+                const fillTodos = filterTodos.filter(todo => todo.isComplete === true)
+                setFilterTodos([...fillTodos])
+            }
+            setCurrentPage(0)
         } else {
-            setShowComplete(false)
+            setFilterTodos(allTodos)
         }
     }
 

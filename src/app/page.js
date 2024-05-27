@@ -11,7 +11,6 @@ const Home = async () => {
   if (!user) {
     return redirect('/signin')
   }
-
   const categories = await CategoryModel.find({ userId: user._id }, "-__v -userId")
   /* if (categories.length === 0) {
     await CategoryModel.create({
