@@ -12,13 +12,8 @@ const Home = async () => {
     return redirect('/signin')
   }
   const categories = await CategoryModel.find({ userId: user._id }, "-__v -userId")
-  /* if (categories.length === 0) {
-    await CategoryModel.create({
-      title: "شخصی",
-      userId: user._id,
-    })
-  } */
-  const todos = await TodoModel.find({ userId: user._id }).sort({_id:-1}).populate("catId")
+
+  const todos = await TodoModel.find({ userId: user._id }).sort({deadline:-1}).populate("catId")
   return (
     <>
       <Menu

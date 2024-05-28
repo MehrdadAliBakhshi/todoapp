@@ -10,9 +10,11 @@ import { useRouter } from 'next/navigation';
 import Filter from './Filter';
 import LostTodo from './LostTodo';
 
+
 const Todos = ({ categories, todos }) => {
+    const router = useRouter()
+
     const [allTodos, setAllTodos] = useState();
-    const [showComplete, setShowComplete] = useState(false)
     const [loading, setLoading] = useState(true)
     const [pageCount, setPageCount] = useState(0)
     const [isDisableNext, setIsDisableNext] = useState(false)
@@ -21,10 +23,22 @@ const Todos = ({ categories, todos }) => {
     const [catId, setCatId] = useState("-1")
     const [filterTodos, setFilterTodos] = useState(allTodos)
     const [lostTodos, setLostTodos] = useState()
-    const router = useRouter()
+    const [resetCheckBox, setResetCheckBox] = useState(false)
+    const [today, setToday] = useState(new Date())
     const perPageNum = 5;
+
+    const getTodos = async () => {
+        const res = await fetch('./api/todo')
+        const data = await res.json()
+        const sortBydeadline = data.sort((a, b) => new Date(b.deadline) - new Date(a.deadline))
+        setAllTodos(sortBydeadline)
+
+    }
+
+
     useEffect(() => {
         setAllTodos([...todos])
+        fetchLostTodos()
     }, [])
     useEffect(() => {
         if (allTodos?.length > 0) {
@@ -38,6 +52,18 @@ const Todos = ({ categories, todos }) => {
         }
         setCurrentPage(0)
     }, [catId, allTodos])
+
+
+    const fetchLostTodos = async () => {
+
+        await fetch('./api/todo')
+            .then(res => res.json())
+            .then(data => {
+                const lost = data.filter(todo => new Date(todo.deadline) < today)
+                setLostTodos([...lost])
+            })
+    }
+
 
     const countPage = () => {
         if (filterTodos) {
@@ -61,10 +87,6 @@ const Todos = ({ categories, todos }) => {
             setIsDisablePrev(false)
         }
     }, [currentPage])
-
-    /*  useEffect(() => {
-         setCurrentPage(pageCount - 1)
-     }, [changePageCount, pageCount]) */
 
     useEffect(() => {
 
@@ -92,7 +114,8 @@ const Todos = ({ categories, todos }) => {
                 theme: 'colored',
                 autoClose: 1000,
                 onClose: () => {
-                    router.refresh()
+                    getTodos()
+                    setResetCheckBox(true)
                 }
             })
         } else {
@@ -118,9 +141,8 @@ const Todos = ({ categories, todos }) => {
                     body: JSON.stringify({ id })
                 })
                 if (res.status === 200) {
-
                     countPage(0)
-                    router.refresh()
+                    getTodos()
                 }
             }
         })
@@ -142,13 +164,14 @@ const Todos = ({ categories, todos }) => {
 
     return (
         <div className={styles.container}>
-            <LostTodo />
+            <LostTodo todos={lostTodos} />
             <div className={styles.all_todos}>
                 <h1 className="title">فعــــــــــــالیــــــــت ها </h1>
                 <Filter
                     categories={categories}
                     setCatId={setCatId}
                     handleshowComplete={handleshowComplete}
+                    resetCheckBox={resetCheckBox}
                 />
                 {loading ?
                     <div className={styles.all_load_list_container}>
@@ -163,7 +186,6 @@ const Todos = ({ categories, todos }) => {
                         <TodosList
                             todos={filterTodos}
                             categories={categories}
-                            showComplete={showComplete}
                             handleComplete={handleComplete}
                             handleDelete={handleDelete}
                             pageCount={pageCount}

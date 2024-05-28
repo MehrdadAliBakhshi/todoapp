@@ -9,7 +9,6 @@ const TodosList = ({
     handleComplete,
     handleDelete,
     categories,
-    showComplete,
     pageCount,
     perPageNum,
     isDisableNext,
@@ -18,10 +17,6 @@ const TodosList = ({
     setCurrentPage
 }) => {
 
-    const compTodo = todos.filter(todo => todo.isComplete === showComplete)
-
-    console.log("compTodo",compTodo);
-    console.log(showComplete);
     const [activeIndex, setActiveIndex] = useState(null)
     const pages = new Array(pageCount).fill(0)
     /**
@@ -63,30 +58,19 @@ const TodosList = ({
         <>
             <div className={styles.all_todos_list_container}>
                 <ul className={styles.all_todos_list}>
-                    {todos?.length ? (
-                        !showComplete ?
-                            (todos.slice(currentPage * perPageNum, (currentPage * perPageNum) + perPageNum).map((todo, index) =>
-                                <Todo
-                                    key={todo._id}
-                                    todo={todo}
-                                    handleComplete={handleComplete}
-                                    isOpen={activeIndex === index}
-                                    catTitle={(categories.filter(cat => cat._id === todo.catId))}
-                                    onClick={() => handleItemClick(index)}
-                                    handleDelete={handleDelete}
-                                />
-                            )) :
-                            (todos.slice(currentPage * perPageNum, (currentPage * perPageNum) + perPageNum).filter(todo => todo.isComplete === showComplete).map((todo, index) =>
-                                <Todo
-                                    key={todo._id}
-                                    todo={todo}
-                                    handleComplete={handleComplete}
-                                    isOpen={activeIndex === index}
-                                    catTitle={(categories.filter(cat => cat._id === todo.catId))}
-                                    onClick={() => handleItemClick(index)}
-                                    handleDelete={handleDelete}
-                                />))
-                    ) : (<li className={styles.todo_not_found}>متاسفانه فعالیتی پیدا نشد</li>)}
+                    {todos?.length ?
+                        (todos.slice(currentPage * perPageNum, (currentPage * perPageNum) + perPageNum).map((todo, index) =>
+                            <Todo
+                                key={todo._id}
+                                todo={todo}
+                                handleComplete={handleComplete}
+                                isOpen={activeIndex === index}
+                                catTitle={(categories.filter(cat => cat._id === todo.catId))}
+                                onClick={() => handleItemClick(index)}
+                                handleDelete={handleDelete}
+                            />
+                        ))
+                        : (<li className={styles.todo_not_found}>متاسفانه فعالیتی پیدا نشد</li>)}
                 </ul>
                 <Pagination
                     hanldePrev={hanldePrev}

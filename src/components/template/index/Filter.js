@@ -1,25 +1,31 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './filter.module.css'
-const Filter = ({ categories, handleshowComplete, setCatId }) => {
+const Filter = ({ categories, handleshowComplete, setCatId, resetCheckBox }) => {
+    const [check, setCheck] = useState(false)
     const complete = useRef()
     const catsChange = (e) => {
         if (e.target.value && e.target.value !== "") {
             setCatId(e.target.value)
         }
     }
+    useEffect(() => {
+        handleComplete()
+    }, [resetCheckBox])
+    useEffect(() => {
+        handleshowComplete(check)
+    }, [check])
 
     const handleComplete = () => {
-        handleshowComplete(complete.current.checked)
+        setCheck(prev => !prev)
+
     }
     return (
         <div className={styles.container}>
-            <div className={styles.show_complete}>
-                <span>
-                    نمایش تکمیل شده ها
-                </span>
-                <input type='checkbox' ref={complete} onChange={handleComplete} />
-            </div>
+            <label className={styles.show_complete} ref={complete} >
+                نمایش تکمیل شده ها :
+                <input type='checkbox' value={check} onChange={handleComplete} />
+            </label>
             <div className={styles.filter_by_cats}>
                 بر اساس دسته بندی :
                 <select

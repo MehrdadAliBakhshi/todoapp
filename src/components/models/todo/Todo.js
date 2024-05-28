@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './todo.module.css'
 import { FaAngleLeft } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
@@ -46,7 +46,8 @@ const Todo = ({ todo, onClick, isOpen, handleComplete, handleDelete }) => {
                     </p>
                     <span className={styles.todo_deadline}>
                         <span className={styles.sub_title}>مهلت اجرا : </span>
-                        {diff > 0 ? diff + " روز " : 'امروز'}</span>
+                        <span className={diff < 0 ? styles.lost_time : ""}>{diff > 0 ? diff + " روز " : diff < 0 ? "تمام شده" : "امروز"}</span>
+                    </span>
                     <div className={styles.todo_actions}>
                         <div
                             className={styles.edit_todo}
@@ -55,7 +56,7 @@ const Todo = ({ todo, onClick, isOpen, handleComplete, handleDelete }) => {
                             ویرایش
                         </div>
                         <div className={styles.todo_complete_container}>
-                        وضیعت : 
+                            وضیعت :
                             <div className={todo.isComplete ? styles.todo_is_completed : styles.todo_is_not_completed} onClick={() => handleTgComplete(todo._id)}>
                                 {todo.isComplete ? 'انجام دادم' : 'انجام ندادم'}</div>
                         </div>

@@ -5,7 +5,7 @@ import DatePicker, { DateObject } from 'react-multi-date-picker';
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import { Formik } from 'formik';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 const validate = (values) => {
@@ -29,6 +29,7 @@ const CreateTodoForm = ({ categories, userId }) => {
     const [today, setToday] = useState();
     const [val, setVal] = useState(new DateObject({ calendar: persian, locale: persian_fa }))
     const [valValidate, setValValidate] = useState('')
+
     useEffect(() => {
         setToday(new DateObject({ calendar: persian, locale: persian_fa }))
     }, [])
@@ -44,7 +45,7 @@ const CreateTodoForm = ({ categories, userId }) => {
                         cats: "-1",
                     }}
                     validate={validate}
-                    onSubmit={async (values) => {
+                    onSubmit={async (values, { setSubmitting }) => {
                         if (!valValidate) {
                             const newTodo = {
                                 title: values.title,
@@ -59,9 +60,15 @@ const CreateTodoForm = ({ categories, userId }) => {
                                 body: JSON.stringify(newTodo)
                             })
                             if (res.status == 201) {
+                                values.title = ""
+                                values.des = ""
+                                values.cats = "-1"
                                 toast.success("فعالیت با موفقیت ایجاد شد", {
                                     autoClose: 1000,
                                     theme: "colored",
+                                    onClose: () => {
+                                        setSubmitting(false)
+                                    }
 
                                 })
                             } else if (res.status === 409) {
@@ -76,6 +83,7 @@ const CreateTodoForm = ({ categories, userId }) => {
                     {({
                         values, errors, touched, handleBlur, handleChange, handleSubmit, isSubmitting
                     }) => (
+
                         <form className={styles.create_todo_form} onSubmit={handleSubmit} >
                             <div className={styles.create_todo_inputs}>
                                 <input
@@ -159,9 +167,9 @@ const CreateTodoForm = ({ categories, userId }) => {
                             </div>
                             <div className={styles.create_todo_btns}>
                                 <button
-                                    type='submit'
-                                    className="primary_btn"
+                                    type="submit"
                                     disabled={isSubmitting}
+                                    className="primary_btn"
                                 > ذخیره </button>
                             </div>
                         </form>
@@ -169,7 +177,7 @@ const CreateTodoForm = ({ categories, userId }) => {
 
                 </Formik>
             </div>
-
+            <ToastContainer />
         </>
     );
 };

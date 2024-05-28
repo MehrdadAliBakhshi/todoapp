@@ -22,7 +22,7 @@ const UsersList = ({ users , todos }) => {
                         </thead>
                         <tbody>
                             {users.map((user, index) => (
-                                <tr className={styles.user_info}>
+                                <tr className={styles.user_info} key={index+1}>
                                     <td>{index + 1}</td>
                                     <td className={styles.user_username}>{user.username}</td>
                                     <td className={styles.user_email}>
