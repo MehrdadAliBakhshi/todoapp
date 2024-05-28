@@ -55,10 +55,17 @@ const Form = () => {
                     } else if (res.status === 419 || res.status === 401) {
                         toast.error('ایمیل یا پسورد نا معتبر است', {
                             theme: "colored",
+                            autoClose: 1000,
                         });
-                    } else if (res.status === 404) {
+                    } else if (res.status === 402) {
+                        toast.error('اکانت شما توسط ادمین بسته شده است', {
+                            theme: "colored",
+                            autoClose: 1000,
+                        });
+                    }else if (res.status === 404) {
                         toast.error('کاربری با این مشخصات یافت نشد', {
                             theme: "colored",
+                            autoClose: 1000,
                         });
                     }
                 }}

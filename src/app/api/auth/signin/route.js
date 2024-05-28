@@ -22,6 +22,9 @@ export async function POST(req) {
         if (!user) {
             return Response.json({ message: "user not found" }, { status: 404 })
         }
+        if (user.isBan) {
+            return Response.json({ message: "user ban" }, { status: 402 })
+        }
         const isCorrectPassword = await verifyPassword(password, user.password)
         if (!isCorrectPassword) {
             return Response.json({ message: "email or password is incorrect" }, { status: 401 })
