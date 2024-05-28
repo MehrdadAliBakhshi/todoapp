@@ -8,7 +8,6 @@ import Link from 'next/link';
 import swal from 'sweetalert';
 import { useRouter } from 'next/navigation';
 import Filter from './Filter';
-import LostTodo from './LostTodo';
 
 
 const Todos = ({ categories, todos }) => {
@@ -22,7 +21,6 @@ const Todos = ({ categories, todos }) => {
     const [currentPage, setCurrentPage] = useState(0)
     const [catId, setCatId] = useState("-1")
     const [filterTodos, setFilterTodos] = useState(allTodos)
-    const [lostTodos, setLostTodos] = useState()
     const [resetCheckBox, setResetCheckBox] = useState(false)
     const [today, setToday] = useState(new Date())
     const perPageNum = 5;
@@ -38,7 +36,6 @@ const Todos = ({ categories, todos }) => {
 
     useEffect(() => {
         setAllTodos([...todos])
-        fetchLostTodos()
     }, [])
     useEffect(() => {
         if (allTodos?.length > 0) {
@@ -54,7 +51,7 @@ const Todos = ({ categories, todos }) => {
     }, [catId, allTodos])
 
 
-    const fetchLostTodos = async () => {
+/*     const fetchLostTodos = async () => {
 
         await fetch('./api/todo')
             .then(res => res.json())
@@ -62,7 +59,7 @@ const Todos = ({ categories, todos }) => {
                 const lost = data.filter(todo => new Date(todo.deadline) < today)
                 setLostTodos([...lost])
             })
-    }
+    } */
 
 
     const countPage = () => {
@@ -164,7 +161,6 @@ const Todos = ({ categories, todos }) => {
 
     return (
         <div className={styles.container}>
-            <LostTodo todos={lostTodos} />
             <div className={styles.all_todos}>
                 <h1 className="title">فعــــــــــــالیــــــــت ها </h1>
                 <Filter

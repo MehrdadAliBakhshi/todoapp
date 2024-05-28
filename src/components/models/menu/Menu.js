@@ -6,9 +6,11 @@ import { FaFingerprint } from "react-icons/fa6";
 import Signout from './Signout';
 import UserInfo from './UserInfo';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Menu = ({ username, role }) => {
 
+    const pathname = usePathname()
     return (
         <div className={styles.menu}>
             <UserInfo username={username} />
@@ -21,16 +23,16 @@ const Menu = ({ username, role }) => {
             <Search />
             <nav className={styles.nav_container}>
                 <ul className={styles.nav} >
-                    <li className={styles.nav_item}>
+                    <li className={`${styles.nav_item} ${pathname === '/' ? styles.active : ''} `}>
                         <Link className={styles.nav_link} href="/">همه فعالیت ها</Link>
                     </li>
-                    <li className={styles.nav_item}>
+                    <li className={`${styles.nav_item} ${pathname === '/addTodo' ? styles.active : ''} `}>
                         <Link className={styles.nav_link} href="/addTodo">فعالیت جدید</Link>
                     </li>
-                    <li className={styles.nav_item}>
+                    <li className={`${styles.nav_item} ${pathname === '/categories' ? styles.active : ''} `}>
                         <Link className={styles.nav_link} href="/categories">دسته بندی ها</Link>
                     </li>
-                    {role === "ADMIN" && <li className={styles.nav_item}>
+                    {role === "ADMIN" && <li className={`${styles.nav_item} ${pathname === '/users' ? styles.active : ''} `} >
                         <Link className={styles.nav_link} href="/users">کاربران</Link>
                     </li>}
 

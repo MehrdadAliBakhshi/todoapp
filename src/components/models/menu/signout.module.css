@@ -6,4 +6,11 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 0.8rem 0.5rem;
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+}
+.signout_link:hover{
+  background-color: var(--grey);
+  color: var(--light);
 }

@@ -1,23 +1,25 @@
 import Menu from '@/components/models/menu/Menu';
-import Todo from '@/components/template/addTodo/Todo';
+import Search from '@/components/template/search/Search';
+import CategoryModel from '@/models/Category';
 import { authUser } from '@/utils/serverHelper';
 import { redirect } from 'next/navigation';
 import React from 'react';
 
-const AddTodo = async () => {
+const page = async () => {
     const user = await authUser()
     if (!user) {
         return redirect('/signin')
     }
+    const categories = await CategoryModel.find({ userId: user._id },"_id title")
     return (
         <>
             <Menu
                 username={JSON.parse(JSON.stringify(user.username))}
                 role={JSON.parse(JSON.stringify(user.role))}
             />
-            <Todo user={JSON.parse(JSON.stringify(user._id))} />
+            <Search categories={JSON.parse(JSON.stringify(categories))} />
         </>
     );
 };
 
-export default AddTodo;
+export default page;

@@ -53,7 +53,6 @@ const TodosList = ({
         }
         setCurrentPage(prev => prev + 1)
     }
-
     return (
         <>
             <div className={styles.all_todos_list_container}>
@@ -65,9 +64,9 @@ const TodosList = ({
                                 todo={todo}
                                 handleComplete={handleComplete}
                                 isOpen={activeIndex === index}
-                                catTitle={(categories.filter(cat => cat._id === todo.catId))}
                                 onClick={() => handleItemClick(index)}
                                 handleDelete={handleDelete}
+                                category = {todo.catId.title}
                             />
                         ))
                         : (<li className={styles.todo_not_found}>متاسفانه فعالیتی پیدا نشد</li>)}

@@ -1,10 +1,10 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './todo.module.css'
 import { FaAngleLeft } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
 
-const Todo = ({ todo, onClick, isOpen, handleComplete, handleDelete ,category }) => {
+const SearchTodo = ({ todo, onClick, isOpen, handleComplete, handleDelete ,category }) => {
     const router = useRouter()
     const [today, setToday] = useState(new Date().getTime())
     const todoDeadline = new Date(todo.deadline).getTime();
@@ -40,12 +40,6 @@ const Todo = ({ todo, onClick, isOpen, handleComplete, handleDelete ,category })
                     {todo.des && <p className={styles.todo_des}>
                         <span className={styles.sub_title}>توضیحات : </span>{todo.des}
                     </p>}
-                    <p className={styles.todo_cat}>
-                        <span className="color" style={{ backgroundColor: todo.catId.color }}></span>
-                        <span className={styles.sub_title}>دسته بندی : </span><span >
-                           {category}
-                        </span>
-                    </p>
                     <span className={styles.todo_deadline}>
                         <span className={styles.sub_title}>مهلت اجرا : </span>
                         <span className={diff < 0 ? styles.lost_time : ""}>{diff > 0 ? diff + " روز " : diff < 0 ? "تمام شده" : "امروز"}</span>
@@ -71,4 +65,4 @@ const Todo = ({ todo, onClick, isOpen, handleComplete, handleDelete ,category })
     );
 };
 
-export default Todo;
+export default SearchTodo;

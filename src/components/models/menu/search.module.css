@@ -12,3 +12,8 @@
   border: none;
   padding: 0.3rem;
 }
+.form_btn{
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
