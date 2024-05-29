@@ -46,6 +46,8 @@ const Todos = ({ categories, todos }) => {
             } else {
                 setFilterTodos(allTodos)
             }
+        }else if(allTodos){
+            setLoading(false)
         }
         setCurrentPage(0)
     }, [catId, allTodos])
@@ -79,7 +81,7 @@ const Todos = ({ categories, todos }) => {
             setIsDisableNext(false)
 
         }
-        if (currentPage <= pageCount - 1) {
+        if (currentPage >= pageCount - 1) {
             setIsDisableNext(true)
             setIsDisablePrev(false)
         }

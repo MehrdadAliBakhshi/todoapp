@@ -18,7 +18,9 @@ const Search = () => {
     }
 
     useEffect(() => {
-        setSearchVal(search)
+        if(search){
+            setSearchVal(search)
+        }
     })
     return (
         < >

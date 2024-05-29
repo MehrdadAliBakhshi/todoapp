@@ -44,6 +44,7 @@
   justify-content: center;
   flex-direction: column;
   gap: 2rem;
+  flex-basis: 100%;
 }
 .todos_not_created h2 {
   font-size: 1.5rem;

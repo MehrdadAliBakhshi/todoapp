@@ -2,7 +2,7 @@
 import React from 'react';
 import styles from './editCat.module.css'
 import { Formik } from 'formik';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 const validate = (values) => {
     const error = {};
@@ -99,6 +99,7 @@ const EditCat = ({ category }) => {
 
                 </Formik>
             </div>
+            <ToastContainer />
         </>
     );
 };

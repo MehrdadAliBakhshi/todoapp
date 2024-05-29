@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import styles from './catForm.module.css'
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { Formik } from 'formik';
 
 const validate = (values) => {
@@ -14,7 +14,7 @@ const validate = (values) => {
     return error;
 }
 
-const CatForm = ({userId , getCats, catsCount }) => {
+const CatForm = ({ userId, getCats, catsCount }) => {
 
     return (
         <>
@@ -31,7 +31,7 @@ const CatForm = ({userId , getCats, catsCount }) => {
                             userId,
                             color: values.color && values.color
                         }
-                        if(catsCount < 5){
+                        if (catsCount < 5) {
                             const res = await fetch('./api/category', {
                                 method: "POST",
                                 headers: { 'Content-Type': 'application/json' },
@@ -46,7 +46,7 @@ const CatForm = ({userId , getCats, catsCount }) => {
                                         values.title = ""
                                         getCats()
                                     }
-    
+
                                 })
                             } else if (res.status === 422) {
                                 toast.error('دسته بندی با این عنوان قبلا ایجاد شده است', {
@@ -61,9 +61,9 @@ const CatForm = ({userId , getCats, catsCount }) => {
                                     theme: 'colored'
                                 })
                             }
-                        }else{
-                            toast.error('حداکثر تداد دسته بندی 5 عدد است',{
-                                theme:"colored"
+                        } else {
+                            toast.error('حداکثر تداد دسته بندی 5 عدد است', {
+                                theme: "colored"
                             })
                         }
                     }}
@@ -72,16 +72,16 @@ const CatForm = ({userId , getCats, catsCount }) => {
                         <form className={styles.create_cat_form} onSubmit={handleSubmit}>
                             <div className={styles.create_cat_inputs}>
                                 <label className={styles.cat_title}>
-                                        <input
-                                            type="text"
-                                            placeholder='عنوان دسته بندی را انتخاب نمایید *'
-                                            className={styles.input_cat_title}
-                                            name='title'
-                                            value={values.title}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
+                                    <input
+                                        type="text"
+                                        placeholder='عنوان دسته بندی را انتخاب نمایید *'
+                                        className={styles.input_cat_title}
+                                        name='title'
+                                        value={values.title}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
 
-                                        />
+                                    />
                                     {errors.title && touched.title && <span className={styles.error}>{errors.title}</span>}
                                 </label>
                                 <label className={styles.select_cat_color_container}>
@@ -106,6 +106,7 @@ const CatForm = ({userId , getCats, catsCount }) => {
 
                 </Formik>
             </div>
+            <ToastContainer />
         </>
     );
 };

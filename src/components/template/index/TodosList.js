@@ -8,7 +8,6 @@ const TodosList = ({
     todos,
     handleComplete,
     handleDelete,
-    categories,
     pageCount,
     perPageNum,
     isDisableNext,

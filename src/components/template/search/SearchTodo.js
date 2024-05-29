@@ -17,7 +17,6 @@ const SearchTodo = ({ todo, onClick, isOpen, handleComplete, handleDelete ,categ
         handleComplete(id)
     }
 
-    console.log(category);
     return (
         <>
             <div className={`${styles.todos_list_item} ${isOpen && styles.todo_whit_des} }`}>
