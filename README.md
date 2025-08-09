@@ -1,6 +1,6 @@
 ##فارسی
 📋 TodoApp – Next.js Fullstack Project
-یک اپلیکیشن مدیریت وظایف (To-Do) با Next.js 13 و MongoDB که شامل عملیات کامل CRUD، سیستم احراز هویت، دسته‌بندی وظایف و مدیریت کاربران است. این پروژه به عنوان نمونه‌کار حرفه‌ای برای بازار کار بین‌المللی آماده شده است.
+یک اپلیکیشن مدیریت وظایف (To-Do) با Next.js 13 و MongoDB که شامل عملیات کامل CRUD، سیستم احراز هویت، دسته‌بندی وظایف و مدیریت کاربران است. 
 
 🚀 ویژگی‌ها
 مدیریت وظایف (CRUD): ایجاد، ویرایش، حذف و مشاهده لیست وظایف
@@ -95,8 +95,9 @@ http://localhost:3000
 📜 لایسنس
 این پروژه تحت لایسنس MIT منتشر شده و استفاده از آن آزاد است.
 ###ENGLISH
+
 📋 TodoApp – Next.js Fullstack Project
-A task management (To-Do) application built with Next.js 13 and MongoDB, featuring full CRUD operations, authentication system, task categorization, and user management. This project is prepared as a professional portfolio piece for the international job market.
+A task management (To-Do) application built with Next.js 13 and MongoDB, featuring full CRUD operations, authentication system, task categorization, and user management. 
 
 🚀 Features
 Task Management (CRUD): Create, edit, delete, and list tasks
